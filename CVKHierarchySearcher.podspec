@@ -1,38 +1,22 @@
-#
-# Be sure to run `pod lib lint CVKHierarchySearcher.podspec' to ensure this is a
-# valid spec and remove all comments before submitting the spec.
-#
-# Any lines starting with a # are optional, but encouraged
-#
-# To learn more about a Podspec see http://guides.cocoapods.org/syntax/podspec.html
-#
-
 Pod::Spec.new do |s|
   s.name             = "CVKHierarchySearcher"
   s.version          = "0.1.0"
-  s.summary          = "A short description of CVKHierarchySearcher."
+  s.summary          = "Helper for important objects in view controller hierarchy."
   s.description      = <<-DESC
-                       An optional longer description of CVKHierarchySearcher
+                       Helper class to access topmost view controllers of different kind
+                       in current hierarchy. Uses app's window and iterates down from it.
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       Implements a protocol to ease its mocking in tests.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/CVKHierarchySearcher"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
+  s.homepage         = "https://github.com/coverback/CVKHierarchySearcher"
   s.license          = 'MIT'
   s.author           = { "Romans Karpelcevs" => "karpelcev@gmail.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/CVKHierarchySearcher.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/coverback/CVKHierarchySearcher.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/cvbk'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes'
-  s.resource_bundles = {
-    'CVKHierarchySearcher' => ['Pod/Assets/*.png']
-  }
-
-  # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+  s.frameworks = 'UIKit'
 end
