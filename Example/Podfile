@@ -1,0 +1,14 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'CVKHierarchySearcher', :exclusive => true do
+  pod "CVKHierarchySearcher", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "CVKHierarchySearcher", :path => "../"
+
+  pod 'Specta', :git => 'https://github.com/specta/specta.git', :tag => 'v0.3.0.beta1'
+  pod 'Expecta'
+  pod 'FBSnapshotTestCase'
+  pod 'Expecta+Snapshots'
+end
