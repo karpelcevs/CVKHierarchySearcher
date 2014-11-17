@@ -13,8 +13,8 @@
 
 @protocol ViewControllerHierarchy <NSObject>
 
-- (UIViewController *)topmostViewController;
-- (UIViewController *)topmostNonModalViewController;
-- (UINavigationController *)topmostNavigationController;
+@property (nonatomic, readonly) UIViewController *topmostViewController;
+@property (nonatomic, readonly) UIViewController *topmostNonModalViewController;
+@property (nonatomic, readonly) UINavigationController *topmostNavigationController;
 
 @end

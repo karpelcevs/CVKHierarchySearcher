@@ -16,7 +16,7 @@ view controller:
 
 ```objective-c
 CVKHierarchySearcher *hierarchy = [[CVKHierarchySearcher alloc] init];
-UIViewController *topmost = [hierarchy topmostViewController];
+UIViewController *topmost = hierarchy.topmostViewController;
 ```
 
 Class relies on `-[UIApplicationDelegate window]`, and if that fails, uses `-[UIApplication keyWindow]`.
