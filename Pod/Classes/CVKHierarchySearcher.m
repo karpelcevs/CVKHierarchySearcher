@@ -36,15 +36,16 @@
     if ([vc navigationController])
         return [vc navigationController];
 
-    if (vc.presentingViewController)
-        return [self topmostNavigationControllerFrom:vc.presentingViewController];
-    else
-        return nil;
+    return nil;
 }
 
 - (UIViewController *)topmostViewControllerFrom:(UIViewController *)viewController
                                    includeModal:(BOOL)includeModal
 {
+    if ([viewController respondsToSelector:@selector(selectedViewController)])
+        return [self topmostViewControllerFrom:[(id)viewController selectedViewController]
+                                  includeModal:includeModal];
+
     if (includeModal && viewController.presentedViewController)
         return [self topmostViewControllerFrom:viewController.presentedViewController
                                   includeModal:includeModal];

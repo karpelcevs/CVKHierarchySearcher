@@ -111,8 +111,8 @@ describe(@"CVKHierarchySearcher", ^{
         it(@"should have one below presented as nonmodal", ^{
             expect([hierarchySearcher topmostNonModalViewController]).will.equal(first);
         });
-        it(@"should have root as navigation", ^{
-            expect([hierarchySearcher topmostNavigationController]).will.equal(navVC);
+        it(@"should miss the navigation controller as it's hidden", ^{
+            expect([hierarchySearcher topmostNavigationController]).will.equal(nil);
         });
     });
 
@@ -140,6 +140,63 @@ describe(@"CVKHierarchySearcher", ^{
         });
         it(@"should have presented as navigation", ^{
             expect([hierarchySearcher topmostNavigationController]).will.equal(navVC);
+        });
+    });
+
+    describe(@"with tab bar and navigation in tabs", ^{
+        beforeEach(^{
+            first = [[UIViewController alloc] init];
+            second = [[UIViewController alloc] init];
+            navVC = [[UINavigationController alloc] init];
+            UITabBarController *tabController = [[UITabBarController alloc] init];
+            [tabController setViewControllers:@[navVC] animated:NO];
+            [tabController setSelectedViewController:navVC];
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tabController];
+
+            [navVC setViewControllers:@[first, second] animated:NO];
+            waitUntil(^(DoneCallback done) {
+                // Just giving previous call some time
+                done();
+            });
+        });
+
+        it(@"should have last pushed one as top", ^{
+            expect([hierarchySearcher topmostViewController]).will.equal(second);
+        });
+        it(@"should have last pushed as nonmodal", ^{
+            expect([hierarchySearcher topmostNonModalViewController]).will.equal(second);
+        });
+        it(@"should have tab's child as navigation", ^{
+            expect([hierarchySearcher topmostNavigationController]).will.equal(navVC);
+        });
+    });
+
+    describe(@"with tab bar, navigation in tabs and presented on top", ^{
+        beforeEach(^{
+            first = [[UIViewController alloc] init];
+            second = [[UIViewController alloc] init];
+            navVC = [[UINavigationController alloc] init];
+            UITabBarController *tabController = [[UITabBarController alloc] init];
+            [tabController setViewControllers:@[navVC] animated:NO];
+            [tabController setSelectedViewController:navVC];
+            [[[UIApplication sharedApplication] keyWindow] setRootViewController:tabController];
+
+            [navVC setViewControllers:@[first] animated:NO];
+            waitUntil(^(DoneCallback done) {
+                // Just giving previous call some time
+                done();
+            });
+            [first presentViewController:second animated:NO completion:nil];
+        });
+
+        it(@"should have presented one as top", ^{
+            expect([hierarchySearcher topmostViewController]).will.equal(second);
+        });
+        it(@"should have presenter as nonmodal", ^{
+            expect([hierarchySearcher topmostNonModalViewController]).will.equal(first);
+        });
+        it(@"should miss the navigation controller as it's hidden", ^{
+            expect([hierarchySearcher topmostNavigationController]).will.equal(nil);
         });
     });
 });
