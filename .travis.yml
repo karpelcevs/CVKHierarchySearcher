@@ -5,7 +5,7 @@ before_install:
   - brew update
   - brew unlink xctool
   - brew install xctool
-  - gem install cocoapods -v '= 0.34.4'
+  - gem install cocoapods -v '= 0.36.0'
   - cd Example && pod install && cd -
 script:
 - xctool test -workspace Example/CVKHierarchySearcher.xcworkspace -scheme CVKHierarchySearcher -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
